@@ -1,0 +1,27 @@
+import random  # So we can randomize a list
+from time import sleep  #So we can use sleep()
+options = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]  #Numbers that the computer can think
+thought = random.choice(options)  #Choosing one number
+loop = 0  #Record how many times the player guessed
+ask = str(input('Would you like to play a game with me? ')).capitalize()  #So he can decide if he wants to play
+while ask != 'Yes' and ask != 'No':  #If he did not type yes or no, the program ask it again
+    print('Please, only answer with yes or no.')  #giving the options for the player
+    ask = str(input('Would you like to play a game with me? ')).capitalize()  #preventing from wrong words
+if ask == 'Yes':
+    print('So let the game begin!')
+    sleep(1)  #It will delay the apearence of the next code
+    guess = int(input('Try to guess what number, from 0 to 10, I am thinking: '))  #The player chooses a number from 0 to 10 and type it.
+    while guess != thought:  #So the program will only end when the player guess it
+        guess = int(input('You failed! Try again: '))
+        loop += 1
+    if guess == thought and loop == 0:  #When the player guess it correctly
+        print('Congratulations! You guessed it in the first try! I was thinking in the numer {}'.format(thought)) #Congratulating the player
+        sleep(1) #It will delay the apearence of the next code
+    elif guess == thought and loop >= 1: #When the player needs more than one try
+        print('Congratulations! You guessed it in the your guess number {}!\nOk, it could be better.\nI was thinking in the numer {}'.format(loop, thought))  #It says how many times the player tried to guess
+    print('Thank you for playing with me! See you next time')  #Inviting for a new game
+elif ask == 'No':  #When the player type no
+    print('So, you are afraid? You coward!')
+sleep(1)
+
+print('---END---')
