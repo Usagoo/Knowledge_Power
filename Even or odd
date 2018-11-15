@@ -1,0 +1,32 @@
+from random import randint  #So we can make the machine choose a number
+win = 0     #Quantity of times that the player won a match
+print('-='*20)
+print('       Lets play even or odd!')
+print('-='*20)
+while True:  #While the player don't loose, the program will run
+    value = int(input('Type a number: '))   #Asking for a number
+    choice = str(input('Even or odd? ')).strip().lower()    #Asking to see if the player wants even or odd
+    while choice != 'even' and choice != 'odd':  #If player type another thing
+        print('Invalid answer! Type again')  #Error message
+        choice = str(input('Even or odd? ')).strip().lower()    #Asking the player to write their choice
+    if choice == 'even' or choice == 'odd':  #If player's choice is even or odd
+        computer = randint(0, 10)  #Computer will choose a integer number between 0 and 10
+        add = value + computer  #Adding the values
+        add_div = add % 2   #To see if the division is going to be exact
+        print(f'The computer chose {computer} and you chose {value}. The sum between them is {add}.')
+        if add_div == 0:  #If the division is exact
+            print(f"it's even!")  #The number is even
+            n = 'even'  #So, variable is set as even
+        elif add_div != 0:  #If the division is not exact
+            print(f"it'a a odd")  #The number is odd
+            n = 'odd'  #So, variable is set as odd
+        if choice == n:  #If choice is equal to the variable
+            print('You win!')  #Player wins
+            win += 1  #Add one victory to the counter
+        if choice != n:  #If choice is different to the variable
+            print('You loose!')  #Player loose
+            break  #Becouse player lostm the program will stop
+if win > 0:  #If the player won at least one time
+    print(f'You won {win} times! Congratulation!')  #Will congratulate the player and show how many times he won
+if win == 0:  #If the player did not win
+    print('You did not win! Better luck next time...')  #Will say that he did not win and wish luck
