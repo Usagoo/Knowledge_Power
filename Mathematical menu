@@ -1,0 +1,28 @@
+loop = True  #So the program can create a loop
+first_number = float(input('First number: '))  #Asking the first number
+second_number = float(input('Second number: '))  #Asking the second number
+bigger = [first_number, second_number]  #Creating a list to put the numbers
+bigger.sort(reverse=True)  #Putting the bigger number as the first
+while loop:  #While loop = True, he will run the program
+    print('''
+---Options choices--- 
+[1] Add
+[2] Multiply
+[3] Bigger
+[4] New numbers
+[5] Exit''')  #Giving the menu options
+    service = int(input('-> What do you want to do? '))
+    if service == 1:  #If user wants to add
+        print('The sum between {} and {} is equal to {}'.format(first_number, second_number, first_number + second_number))  #Adding numbers
+    elif service == 2:  #If user wants to multiply
+        print('The multiplication between {} and {} is equal to {}'.format(first_number, second_number, first_number * second_number))
+    elif service == 3:  #If user wants to know the bigger number
+        print('The bigger number between {} and {} is {}'.format(first_number, second_number, bigger[0]))
+    elif service == 4:  #If user wants to change the preview numbers
+        first_number = float(input('First number: '))
+        second_number = float(input('Second number: '))
+    elif service == 5:  #If user wants to exit
+        print('See you later')
+        loop = False  #If Loop = False, the loop will be ended and the program ended
+    else:  #When the user types a wrong number
+        print('Invalid value')
