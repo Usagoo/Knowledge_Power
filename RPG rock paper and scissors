@@ -168,7 +168,7 @@ while True:
             return [Paladin, Berzerker, Priest]
 
         def draw(self):
-            return [Monk, Necromancer]
+            return [Monk, Necromancer, Mage]
 
 
     character = {'Warrior': Warrior, 'Paladin': Paladin, 'Berzerker': Berzerker, 'Monk': Monk, 'Ranger': Ranger,
