@@ -1,0 +1,234 @@
+import random
+from time import sleep
+
+print('Hi there, be welcome to the fantasy rock paper and scissors.')
+sleep(1)
+rules = input('Do you know how does it work? [Y/N] ')
+if rules[0].upper() == 'Y':
+    print('So, let the game begin!')
+else:
+    print('Just like rock, paper and scissors, you choose a class and the computer chooses other.')
+    sleep(0.5)
+    print('The winning and loosing combinations are already set.')
+while True:
+
+    count = 0
+
+    to_choose = [
+        'Warrior', 'Paladin', 'Berzerker',
+        'Monk', 'Ranger', 'Assassin',
+        'Priest', 'Mage', 'Necromancer'
+    ]
+
+
+    class Race:
+
+        def __str__(self):
+            return 'Non printable object'
+
+        def winning(self):
+            print('Winning chances: ', end='')
+
+        def loosing(self):
+            print('Loosing chances: ', end='')
+
+        def draw(self):
+            print('Draw chances: ', end='')
+
+
+    class Warrior(Race):
+
+        def __str__(self):
+            return 'Warrior'
+
+        def winning(self):
+            return [Assassin, Priest, Monk]
+
+        def loosing(self):
+            return [Berzerker, Necromancer, Ranger]
+
+        def draw(self):
+            return [Mage, Paladin, Warrior]
+
+
+    class Paladin(Race):
+
+        def __str__(self):
+            return 'Paladin'
+
+        def winning(self):
+            return [Assassin, Monk, Necromancer]
+
+        def loosing(self):
+            return [Ranger, Priest, Mage]
+
+        def draw(self):
+            return [Warrior, Berzerker, Paladin]
+
+
+    class Berzerker(Race):
+
+        def __str__(self):
+            return 'Berzerker'
+
+        def winning(self):
+            return [Warrior, Necromancer, Ranger]
+
+        def loosing(self):
+            return [Priest, Assassin, Mage]
+
+        def draw(self):
+            return [Paladin, Monk, Berzerker]
+
+
+    class Monk(Race):
+
+        def __str__(self):
+            return 'Monk'
+
+        def winning(self):
+            return [Ranger, Mage, Priest]
+
+        def loosing(self):
+            return [Warrior, Paladin, Assassin]
+
+        def draw(self):
+            return [Berzerker, Necromancer, Monk]
+
+
+    class Ranger(Race):
+
+        def __str__(self):
+            return 'Ranger'
+
+        def winning(self):
+            return [Warrior, Paladin, Assassin]
+
+        def loosing(self):
+            return [Berzerker, Monk, Necromancer]
+
+        def draw(self):
+            return [Priest, Mage, Ranger]
+
+
+    class Assassin(Race):
+
+        def __str__(self):
+            return 'Assassin'
+
+        def winning(self):
+            return [Berzerker, Monk, Ranger, Priest]
+
+        def loosing(self):
+            return [Warrior, Paladin, Necromancer, Mage]
+
+        def draw(self):
+            return [Assassin]
+
+
+    class Priest(Race):
+
+        def __str__(self):
+            return 'Priest'
+
+        def winning(self):
+            return [Paladin, Berzerker, Necromancer]
+
+        def loosing(self):
+            return [Warrior, Monk, Mage]
+
+        def draw(self):
+            return [Ranger, Assassin, Priest]
+
+
+    class Mage(Race):
+
+        def __str__(self):
+            return 'Mage'
+
+        def winning(self):
+            return [Paladin, Berzerker, Priest, Assassin]
+
+        def loosing(self):
+            return [Monk]
+
+        def draw(self):
+            return [Warrior, Ranger, Necromancer, Mage]
+
+
+    class Necromancer(Race):
+
+        def __str__(self):
+            return 'Necromancer'
+
+        def winning(self):
+            return [Warrior, Ranger, Assassin]
+
+        def loosing(self):
+            return [Paladin, Berzerker, Priest]
+
+        def draw(self):
+            return [Monk, Necromancer]
+
+
+    character = {'Warrior': Warrior, 'Paladin': Paladin, 'Berzerker': Berzerker, 'Monk': Monk, 'Ranger': Ranger,
+                 'Assassin': Assassin, 'Priest': Priest, 'Mage': Mage, 'Necromancer': Necromancer}
+
+    to_sort = [
+        Warrior, Paladin, Berzerker,
+        Monk, Ranger, Assassin,
+        Priest, Mage, Necromancer
+    ]
+
+    print('We have a total of 9 classes. ')
+    print('-='*20)
+
+    print('Available classes:')
+    for v in to_choose:
+        print(v)
+
+    choice = input('Which character do you want to choose? ').title()
+
+    while choice not in to_choose:
+        print('Invalid character.')
+        choice = input('Which character do you want to choose? ')
+
+
+    def computer_choice():
+        """
+        Randomizes a list of characters and choose one
+        """
+        return random.choice(to_sort)
+
+    bull = character[choice]
+    cow = computer_choice()
+
+    def replay():
+        """
+        Asks if the player wants to play gain
+        """
+        return input('Would you like to play again? [Y/N] ')[0].lower() == 'y'
+
+    def winning():
+        """
+        Analizes the combination of win, loose and draw
+        """
+        print('The computer chose: ', end='')
+        print(f'{cow()}\nYou chose: {choice}')
+
+        if bull in cow.winning(cow):
+            print('You Loose!')
+            global loosing_score
+
+        elif bull in cow.loosing(cow):
+            print('You Win!')
+            global winning_score
+
+        elif bull in cow.draw(cow):
+            print("It's a draw!!")
+            global draw_score
+
+    winning()
+    if not replay():
+        print('Thanks for playing!')
+        break
